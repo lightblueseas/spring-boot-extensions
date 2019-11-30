@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.dokka.gradle.DokkaTask
+import java.net.URI
 
 val springBootDependenciesVersion = "2.2.1.RELEASE"
 val sillyJdbcVersion = "5.6"
@@ -17,7 +18,7 @@ plugins {
 }
 
 group = "de.alpharogroup"
-version = "1.1-SNAPSHOT"
+version = "1.2-SNAPSHOT"
 description = "spring-boot-extensions"
 
 repositories {
@@ -50,7 +51,6 @@ dependencyManagement {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
-
     implementation("de.alpharogroup:silly-jdbc:$sillyJdbcVersion")
     implementation("de.alpharogroup:yaml-to-prop-to-yaml:${yamlToPropToYamlVersion}")
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
@@ -69,48 +69,52 @@ publishing {
             artifact(dokkaJar)
 
             pom {
-                val name = "${rootProject.name}"
-                val description = "The target of this project is to provide extensions for spring-boot"
-                val url = "https://github.com/lightblueseas/"+"${rootProject.name}"
+                name.set("${rootProject.name}")
+                url.set("https://github.com/lightblueseas/"+"${rootProject.name}")
+                description.set("The target of this project is to provide extensions for spring-boot")
                 organization {
-                    val name = "Alpha Ro Group UG (haftungsbeschrängt)"
-                    val url = "http://www.alpharogroup.de/"
+                    name.set("Alpha Ro Group UG (haftungsbeschrängt)")
+                    url.set("http://www.alpharogroup.de/")
                 }
                 issueManagement {
-                    val system = "GitHub"
-                    val url = "https://github.com/lightblueseas/"+"${rootProject.name}"+"/issues"
+                    system.set("GitHub")
+                    url.set("https://github.com/lightblueseas/"+"${rootProject.name}"+"/issues")
                 }
                 licenses {
                     license {
-                        val name = "MIT License"
-                        val url = "http://www.opensource.org/licenses/mit-license.php"
-                        val distribution = "repo"
+                        name.set("MIT License")
+                        url.set("http://www.opensource.org/licenses/mit-license.php")
+                        distribution.set("repo")
                     }
                 }
                 developers {
                     developer {
-                        val id = "astrapi69"
-                        val name = "Asterios Raptis"
+                        id.set("astrapi69")
+                        name.set("Asterios Raptis")
                     }
                 }
                 scm {
-                    val connection = "scm:git:git:@github.com:lightblueseas/"+"${rootProject.name}"+".git"
-                    val developerConnection = "scm:git:git@github.com:lightblueseas/"+"${rootProject.name}"+".git"
-                    val url = "git:@github.com:lightblueseas/"+"${rootProject.name}"+".git"
+                    connection.set("scm:git:git:@github.com:lightblueseas/"+"${rootProject.name}"+".git")
+                    developerConnection.set("scm:git:git@github.com:lightblueseas/"+"${rootProject.name}"+".git")
+                    url.set("git:@github.com:lightblueseas/"+"${rootProject.name}"+".git")
                 }
             }
 
             repositories {
                 maven {
                     credentials {
-                        val username = System.getenv("ossrhUsername")
+                        val usernameString = System.getenv("ossrhUsername")
                                 ?: project.property("ossrhUsername")
-                        val password = System.getenv("ossrhPassword")
+                        val passwordString = System.getenv("ossrhPassword")
                                 ?: project.property("ossrhPassword")
+                        username = usernameString.toString()
+                        password = passwordString.toString()
                     }
                     val releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
                     val snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
-                    val url = if(version.endsWith("SNAPSHOT"))  snapshotsRepoUrl else releasesRepoUrl
+                    val projectVersion = version.toString()
+                    val urlString = if(projectVersion.endsWith("SNAPSHOT"))  snapshotsRepoUrl else releasesRepoUrl
+                    url = URI.create(urlString)
                 }
             }
         }
