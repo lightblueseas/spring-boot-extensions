@@ -1,5 +1,6 @@
 package de.alpharogroup.spring.boot.application
 
+import de.alpharogroup.jdbc.CreationState
 import de.alpharogroup.jdbc.PostgreSQLConnectionsExtensions
 import de.alpharogroup.yaml.YamlToPropertiesExtensions
 import org.springframework.boot.SpringApplication
@@ -12,6 +13,7 @@ import java.io.File
  */
 object ApplicationHooks {
 
+    lateinit var creationState: CreationState
 	/**
 	 * Creates a new database if not exists
 	 */
@@ -23,8 +25,9 @@ object ApplicationHooks {
      * Extension method for the SpringApplication to add a new database if not exists
      */
     fun SpringApplication.addDbIfNotExists(parent: File, yamlFilename: String) {
+
         this.addListeners(ApplicationListener<ApplicationStartingEvent> { _: ApplicationStartingEvent ->
-            PostgreSQLConnectionsExtensions.newDatabase(YamlToPropertiesExtensions
+           creationState = PostgreSQLConnectionsExtensions.newDatabase(YamlToPropertiesExtensions
                     .toProperties(File(parent, yamlFilename).absolutePath) )
         })
     }

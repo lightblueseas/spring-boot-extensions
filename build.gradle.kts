@@ -1,10 +1,9 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 import org.gradle.jvm.tasks.Jar
-import org.jetbrains.dokka.gradle.DokkaTask
 import java.net.URI
 
 val springBootDependenciesVersion = "2.2.1.RELEASE"
-val sillyJdbcVersion = "5.6"
+val sillyJdbcVersion = "5.7"
 val yamlToPropToYamlVersion = "1.1"
 
 plugins {
@@ -18,7 +17,7 @@ plugins {
 }
 
 group = "de.alpharogroup"
-version = "1.2"
+version = "1.2.1"
 description = "spring-boot-extensions"
 
 repositories {
