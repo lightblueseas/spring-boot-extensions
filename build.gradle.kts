@@ -4,7 +4,7 @@ import java.net.URI
 
 val springBootDependenciesVersion = "2.2.1.RELEASE"
 val sillyJdbcVersion = "5.7"
-val yamlToPropToYamlVersion = "1.1"
+val yamlToPropToYamlVersion = "1.1.1"
 
 plugins {
     signing
@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "de.alpharogroup"
-version = "1.3-SNAPSHOT"
+version = "1.3"
 description = "spring-boot-extensions"
 
 repositories {
