@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "de.alpharogroup"
-version = "1.3"
+version = "1.4-SNAPSHOT"
 description = "spring-boot-extensions"
 
 repositories {
