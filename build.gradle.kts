@@ -3,12 +3,11 @@ import org.gradle.jvm.tasks.Jar
 import java.net.URI
 
 val springBootDependenciesVersion = "2.2.1.RELEASE"
-val sillyJdbcVersion = "5.7"
-val yamlToPropToYamlVersion = "1.1.1"
+val sillyJdbcVersion = "5.9"
+val yamlToPropToYamlVersion = "1.2"
 
 plugins {
     signing
-    id("io.franzbecker.gradle-lombok") version "3.1.0"
     id("io.spring.dependency-management") version "1.0.8.RELEASE"
     id("java")
     id("maven-publish")
@@ -16,12 +15,11 @@ plugins {
     id("org.jetbrains.dokka") version "0.9.17"
 }
 
-group = "de.alpharogroup"
-version = "1.4-SNAPSHOT"
+group = "io.github.astrapi69"
+version = "1.4"
 description = "spring-boot-extensions"
 
 repositories {
-    jcenter()
     mavenLocal()
     mavenCentral()
 }
@@ -50,8 +48,8 @@ dependencyManagement {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
-    implementation("de.alpharogroup:silly-jdbc:$sillyJdbcVersion")
-    implementation("de.alpharogroup:yaml-to-prop-to-yaml:${yamlToPropToYamlVersion}")
+    implementation("io.github.astrapi69:silly-jdbc:$sillyJdbcVersion")
+    implementation("io.github.astrapi69:yaml-to-prop-to-yaml:${yamlToPropToYamlVersion}")
     implementation(kotlin("stdlib", KotlinCompilerVersion.VERSION))
 }
 
@@ -72,8 +70,8 @@ publishing {
                 url.set("https://github.com/lightblueseas/"+"${rootProject.name}")
                 description.set("The target of this project is to provide extensions for spring-boot")
                 organization {
-                    name.set("Alpha Ro Group UG (haftungsbeschrängt)")
-                    url.set("http://www.alpharogroup.de/")
+                    name.set("Asterios Raptis")
+                    url.set("https://astrapi69.github.io/")
                 }
                 issueManagement {
                     system.set("GitHub")

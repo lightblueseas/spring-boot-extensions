@@ -1,8 +1,8 @@
-package de.alpharogroup.spring.boot.application
+package io.github.astrapi69.spring.boot.application
 
-import de.alpharogroup.jdbc.CreationState
-import de.alpharogroup.jdbc.PostgreSQLConnectionsExtensions
-import de.alpharogroup.yaml.YamlToPropertiesExtensions
+import io.github.astrapi69.jdbc.CreationState
+import io.github.astrapi69.jdbc.PostgreSQLConnectionsExtensions
+import io.github.astrapi69.yaml.YamlToPropertiesExtensions
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.context.event.ApplicationStartingEvent
 import org.springframework.context.ApplicationListener
